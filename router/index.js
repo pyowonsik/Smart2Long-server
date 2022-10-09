@@ -3,17 +3,14 @@ var app = express()
 var router = express.Router();
 
 
-
-app.use(express.json())
-// app.use(express.urlencoded({extended:true}))
-app.use(express.urlencoded({extended:false}));
-
-var signup = require('./signup/signup')
 var main = require('./main/main')
+var signup = require('./signup/signup')
+var signin = require('./signin/signin')
 
-router.use('/signup',signup)
+
 router.use('/main',main)
-
+router.use('/signup',signup)
+router.use('/signin',signin)
 
 
 
