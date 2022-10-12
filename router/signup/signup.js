@@ -1,4 +1,5 @@
 var express = require("express");
+// var app = express();
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
 var router = express.Router();
@@ -11,6 +12,12 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
+
+// router.use(bodyParser.json());
+
+router.use(express.json());
+// router.use(express.urlencoded({ extended: true }));
+router.use(express.urlencoded({ extended: false }));
 
 router.get("/", (req, res) => {
   res.send("Hello , signup");
@@ -29,7 +36,7 @@ router.post("/", function (req, res) {
       console.log(err);
       return res.status(400).json({ message: "signup failed" });
     } else {
-      return res.status(200).json({ result: "signup success" });
+      return res.status(200).json({ message: "signup success" });
     }
   });
 });
