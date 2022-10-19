@@ -82,13 +82,16 @@ router.post("/",function (req,res){
 
 
 
+
+
 // sql ? 로 바꾸고  주석 플기
-router.get("/numbegginer",(req,res) => {
-  // const tryclass = req.body.tryclass;
-  const query = "select * from trytest where tryclass = '초등영어' ";
-  connection.query(query, function(error,rows){
+router.get("/numbegginer/:tryclass",(req,res) => {
+  const tryclass = req.params.tryclass;
+  const query = "select * from trytest where tryclass = ? ";
+  connection.query(query,[tryclass] ,function(error,rows){
+    // console.log(tryclass);
+    // console.log(rows);
     if(error) console.log(error);
-    // console.log(rows.length);
     let data = rows.length;
     jsonDatas = JSON.parse(data);
     console.log(jsonDatas);

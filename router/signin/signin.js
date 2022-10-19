@@ -43,7 +43,7 @@ router.post("/",function (req,res){
       }
       console.log(rows[0].name + "님 login success");
       console.log("login success");      
-      console.log('result : ' + rows[0].begginer_re + " " + rows[0].middler_re+" " + rows[0].higher_re+" " + rows[0].toiecer_re );
+      // console.log('result : ' + rows[0].begginer_re + " " + rows[0].middler_re+" " + rows[0].higher_re+" " + rows[0].toiecer_re );
       // req.session.user = rows[0];
       // console.log("session 생성 완료" + "email : " + req.session.user.email + " name : " + req.session.user.name);
       return res.status(200).json({message:"login success"});
@@ -52,22 +52,32 @@ router.post("/",function (req,res){
 })
 
 
+// app.get("/item/:id", (req, res) =>{
+//   let id = req.params.id;
+//   let datas = fs.readFileSync("shoppingData.json");
+//   jsonDatas = JSON.parse(datas);
+//   console.log(jsonDatas);
+//   let result = jsonDatas.find((e) => e.id == id);
+//   return res.json(result);
+// });
 
-// sql ? 로 바꾸고  주석 플기
-router.get("/begginer",(req,res) => {
-  // const email = req.body.email;
-  const query = "select * from users where email = 'abc@abc.com' ";
-  connection.query(query, function(error,rows){
-    if(error) console.log(error);
-    // console.log(rows[0].begginer_re);
-    // console.log(email);
-    let data = rows[0].begginer_re;
-    jsonDatas = JSON.parse(data);
-    console.log(jsonDatas);
-    let result = jsonDatas;
-    return res.json(result);
-  })
-});
+
+// // sql ? 로 바꾸고  주석 플기
+// router.get("/begginer/:email",(req,res) => {
+//   const email = req.params.email;
+//   const query = "select * from users where email = ? ";
+//   connection.query(query,[email], function(error,rows){
+//     // console.log(email);
+//     // console.log(rows[0]);
+//     // console.log(rows[0].begginer_re);
+//     if(error) console.log(error);
+//     let data = rows[0].begginer_re;
+//     jsonDatas = JSON.parse(data);
+//     console.log(jsonDatas);
+//     let result = jsonDatas;
+//     return res.json(result);
+//   })
+// });
 
 
 // router.get("/middler",(req,res) => {
