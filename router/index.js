@@ -15,7 +15,7 @@ var trytest = require('./trytest/trytest')
 router.use('/main',main)
 router.use('/signup',signup)
 router.use('/signin',signin)
-router.use('/test',test)
+// router.use('/test',test)
 router.use('/trytest',trytest)
 
 
