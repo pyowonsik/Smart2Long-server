@@ -96,12 +96,34 @@ router.post("/deleteword",(req,res) =>{
 })
 
 
+//단어장으로 들어올때는 Test(틀림,체크) 에서만 가능 하기 때문에 Test에서 email,word,mean,ex 모두 쏴줘야한다.
+router.post("/insertword" , (req,res) =>{
+
+    const email = req.body.email;
+    const word = req.body.word;
+    const mean = req.body.mean;
+    const ex = req.body.ex;
+
+    console.log(req.body);
+    // const word = req.body.word;
+    const query = "insert into wordbook (email,word,mean,ex) values (?,?,?,?)";
+    connection.query(query,[email,word,mean,ex],function(error,rows){
+        if(error){
+            console.log(error);
+            return res.status(400).json({message : "insert failed"});
+        }
+        else{
+            return res.status(200).json({message : "insert success"});
+        }
+    })
+
+}) 
+
+
 
 // insert post로 (시험에서 틀린단어 , 체크한단어)
 
 
-
-// email값 pk로 db에서 리스트 형태로 get
 
 module.exports = router;
 
