@@ -50,6 +50,37 @@ router.get("/getwordbooklist",(req,res) => {
     })
 })
 
+
+router.get("/getexample/:word",(req,res) => {
+    
+    const word = req.params.word;
+    const query = "select * from wordbook where word = ?";
+    connection.query(query,[word],function(error,rows){
+
+        let data = {
+            "word" : "",
+            "ex" : "",
+        };
+        if(error)console.log(error);
+        data.word = rows[0].word;
+        data.ex = rows[0].ex;
+        console.log(data);
+        const json = JSON.stringify(data);
+        console.log(json);
+        jsonDatas = JSON.parse(json);
+        console.log(jsonDatas);
+        let result = jsonDatas;
+        console.log(result);
+        return res.json(result);
+        
+        // data.push({"word" : rows[0].word, "ex" : rows[0].ex});
+        
+    })
+});
+
+
+
+
 router.post("/deleteword",(req,res) =>{
     const email = req.body.email;
     const word = req.body.word;
@@ -63,6 +94,7 @@ router.post("/deleteword",(req,res) =>{
         }
     })
 })
+
 
 
 // insert post로 (시험에서 틀린단어 , 체크한단어)
