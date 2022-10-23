@@ -78,18 +78,14 @@ router.get("/numbegginer/:tryclass",(req,res) => {
   })
 });
 
-
-// sql ? 로 바꾸고  주석 플기
 router.get("/getwordmean/:word",(req,res) => {
   const word = req.params.word;
   const query = "select * from trytest where word = ? ";
   connection.query(query,[word] ,function(error,rows){
-  
     let data = { 
       "word" : "", 
       "mean" : ""
     }
-    
     data.word = rows[0].word;
     data.mean = rows[0].mean;
     const json = JSON.stringify(data);
@@ -97,10 +93,43 @@ router.get("/getwordmean/:word",(req,res) => {
     let result = jsonDatas;
     console.log(result);
     return res.json(result);
+  })
+});
 
-  
-  
-  
+
+router.get("/gettodayword",(req,res) => {
+ 
+  const query = "select * from trytest ";
+  connection.query(query,function(error,rows){
+    console.log(rows);
+    let data = {
+      "word" : "",
+      "mean" : "",
+    }
+
+    const n = Math.floor(Math.random() * (rows.length) + 1);
+    // console.log(n);
+    data.word = rows[n].word;
+    data.mean = rows[n].mean;
+    const json = JSON.stringify(data);
+    jsonDatas = JSON.parse(json);
+    let result = jsonDatas;
+    console.log(result);
+    return res.json(result);
+
+
+
+    // let data = { 
+    //   "word" : "", 
+    //   "mean" : ""
+    // }
+    // data.word = rows[0].word;
+    // data.mean = rows[0].mean;
+    // const json = JSON.stringify(data);
+    // jsonDatas = JSON.parse(json);
+    // let result = jsonDatas;
+    // console.log(result);
+    // return res.json(result);
   })
 });
 
