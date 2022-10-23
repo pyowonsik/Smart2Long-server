@@ -61,28 +61,6 @@ router.post("/",function (req,res){
 
 
 
-// router.get("/getbegwords",(req,res) => {
-//   const tryclass = req.body.tryclass;
-//   const query = "select * from trytest ";
-//   connection.query(query,[tryclass], function(error,rows){
-//     if(error) console.log(error);
-//     for(var i = 0 ; i < rows[0].length ; i++){
-//       if(rows[0].tryclass == '초등영어'){
-//         rows[0] = rows[0];
-//       }  
-//     }
-//     console.log(rows );
-//     // let data = rows[0].length;
-//     // jsonDatas = JSON.parse(data);
-//     // console.log(jsonDatas);
-//     // let result = jsonDatas;
-//     // return res.json(result);
-//   })
-// });
-
-
-
-
 
 // sql ? 로 바꾸고  주석 플기
 router.get("/numbegginer/:tryclass",(req,res) => {
@@ -97,6 +75,32 @@ router.get("/numbegginer/:tryclass",(req,res) => {
     console.log(jsonDatas);
     let result = jsonDatas;
     return res.json(result);
+  })
+});
+
+
+// sql ? 로 바꾸고  주석 플기
+router.get("/getwordmean/:word",(req,res) => {
+  const word = req.params.word;
+  const query = "select * from trytest where word = ? ";
+  connection.query(query,[word] ,function(error,rows){
+  
+    let data = { 
+      "word" : "", 
+      "mean" : ""
+    }
+    
+    data.word = rows[0].word;
+    data.mean = rows[0].mean;
+    const json = JSON.stringify(data);
+    jsonDatas = JSON.parse(json);
+    let result = jsonDatas;
+    console.log(result);
+    return res.json(result);
+
+  
+  
+  
   })
 });
 

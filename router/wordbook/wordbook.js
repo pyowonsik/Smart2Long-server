@@ -1,6 +1,7 @@
 var express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
+const { query } = require("express");
 var router = express.Router();
 
 
@@ -181,8 +182,6 @@ router.post("/insertword" , (req,res) =>{
         }
     })
 }) 
-
-
 
 
 
