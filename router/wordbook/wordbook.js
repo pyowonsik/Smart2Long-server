@@ -160,8 +160,47 @@ router.get('/getwordinfo/:email/:word', (req,res) => {
 })
 
 
+router.get("/gettodayword/:email",(req,res) => {
+    
+
+    const email = req.params.email;
+ 
+    const query = "select * from wordbook where email = ? ";
+    connection.query(query,[email],function(error,rows){
+      let data = {
+        "word" : "",
+        "mean" : "",
+      }
+  
+      const n = Math.floor(Math.random() * (rows.length) + 1)
+      data.word = rows[n].word;
+      data.mean = rows[n].mean;
+      const json = JSON.stringify(data);
+      jsonDatas = JSON.parse(json);
+      let result = jsonDatas;
+      console.log(result);
+      return res.json(result);
+  
+  
+      // let data = { 
+      //   "word" : "", 
+      //   "mean" : ""
+      // }
+      // data.word = rows[0].word;
+      // data.mean = rows[0].mean;
+      // const json = JSON.stringify(data);
+      // jsonDatas = JSON.parse(json);
+      // let result = jsonDatas;
+      // console.log(result);
+      // return res.json(result);
+    })
+  });
+  
+
+
 
 //단어장으로 들어올때는 Test(틀림,체크) 에서만 가능 하기 때문에 Test에서 email,word,mean,ex 모두 쏴줘야한다.
+// email에 맞는 단어를 넣어줘야 하기 때문에 안된다 아직
 router.post("/insertword" , (req,res) =>{
 
     const email = req.body.email;

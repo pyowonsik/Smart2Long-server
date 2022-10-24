@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
-
+// email 에 맞는 문제를 넣어줘야함
 router.post("/",function (req,res){
 
   const tryclass = req.body.tryclass;
@@ -58,6 +58,78 @@ router.post("/",function (req,res){
    
   })
 })
+
+
+
+// email 에 맞는 문제를 넣어줘야함
+router.get("/getwordlist/:tryclass",function (req,res){
+
+  const tryclass = req.params.tryclass;
+
+  const query = "select * from trytest where tryclass = ?";
+
+  connection.query(query,[tryclass],function(err,rows){
+    data = [];
+    if(err){
+        console.log(err);
+        // return res.status(400).json({message : "trytest failed"});
+    } else{
+        for(var i = 0 ; i <4 ; i++){
+          let n = Math.floor(Math.random() * rows.length + 1 )
+          if (! sameNum(n)) {
+            data.push({"word":rows[n].word,"mean":rows[n].mean});
+            // data.push({"word":rows[n].word});  
+          }else{
+            i--;
+          }
+        }
+        function sameNum (n) {
+          return data.find((e) => (e === n));
+        }
+
+        console.log(data);
+        const json = JSON.stringify(data);
+        jsonDatas = JSON.parse(json);
+        let result = jsonDatas;
+        console.log(result);
+        return res.json(result);
+       }
+   
+  })
+})
+
+
+
+// email 에 맞는 문제를 넣어줘야함
+router.get("/getfirstword/:tryclass",function (req,res){
+
+  const tryclass = req.params.tryclass;
+
+  const query = "select * from trytest where tryclass = ?";
+
+  connection.query(query,[tryclass],function(err,rows){
+    data = {
+      "word" : "",
+      "mean" : "",
+    };
+    if(err){
+        console.log(err);
+        // return res.status(400).json({message : "trytest failed"});
+    } else{
+        let n = Math.floor(Math.random() * rows.length + 1 )
+        data.word = rows[n].word;
+        data.mean = rows[n].mean;
+        const json = JSON.stringify(data);
+        jsonDatas = JSON.parse(json);
+        let result = jsonDatas;
+        console.log(result);
+        return res.json(result);
+       }
+   
+  })
+})
+
+
 
 
 
@@ -96,42 +168,6 @@ router.get("/getwordmean/:word",(req,res) => {
   })
 });
 
-
-router.get("/gettodayword",(req,res) => {
- 
-  const query = "select * from trytest ";
-  connection.query(query,function(error,rows){
-    console.log(rows);
-    let data = {
-      "word" : "",
-      "mean" : "",
-    }
-
-    const n = Math.floor(Math.random() * (rows.length) + 1);
-    // console.log(n);
-    data.word = rows[n].word;
-    data.mean = rows[n].mean;
-    const json = JSON.stringify(data);
-    jsonDatas = JSON.parse(json);
-    let result = jsonDatas;
-    console.log(result);
-    return res.json(result);
-
-
-
-    // let data = { 
-    //   "word" : "", 
-    //   "mean" : ""
-    // }
-    // data.word = rows[0].word;
-    // data.mean = rows[0].mean;
-    // const json = JSON.stringify(data);
-    // jsonDatas = JSON.parse(json);
-    // let result = jsonDatas;
-    // console.log(result);
-    // return res.json(result);
-  })
-});
 
 
 
