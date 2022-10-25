@@ -123,28 +123,24 @@ router.post("/deleteword",(req,res) =>{
 
 
 // Test 페이지에서 (email,word)로 wordinfo 를 가져와서 insertword로 단어장에 넣어줘야함
-router.get('/getwordinfo/:email/:word', (req,res) => {
+router.get('/getwordinfo/:word', (req,res) => {
 
-    const email = req.params.email;
     const word = req.params.word;
 
-    const query = "select * from trytest where email = ? AND word = ? ";
-    connection.query(query,[email,word],function(error,rows){
+    const query = "select * from trytest where word = ? ";
+    connection.query(query,[word],function(error,rows){
         
         
     
 
         let data = {
-            "email" : "",
             "word" : "",
             "mean" : "",
             "ex" : ""           
         }
 
-        console.log(email);
         console.log(word);
         console.log(rows[0]);
-        data.email = rows[0].email;
         data.word = rows[0].word;
         data.mean = rows[0].mean;
         data.ex = rows[0].ex;
@@ -180,19 +176,6 @@ router.get("/gettodayword/:email",(req,res) => {
       let result = jsonDatas;
       console.log(result);
       return res.json(result);
-  
-  
-      // let data = { 
-      //   "word" : "", 
-      //   "mean" : ""
-      // }
-      // data.word = rows[0].word;
-      // data.mean = rows[0].mean;
-      // const json = JSON.stringify(data);
-      // jsonDatas = JSON.parse(json);
-      // let result = jsonDatas;
-      // console.log(result);
-      // return res.json(result);
     })
   });
   
@@ -224,6 +207,26 @@ router.post("/insertword" , (req,res) =>{
 
 
 
+router.get("/getwordmean/:email/:word",(req,res) => {
+    const email = req.params.email;
+    const word = req.params.word;
+    const query = "select * from wordbook where email = ? AND word = ? ";
+    connection.query(query,[email,word] ,function(error,rows){
+    // console.log(rows);
+          let data = { 
+        "word" : "", 
+        "mean" : ""
+      }
+      data.word = rows[0].word;
+      data.mean = rows[0].mean;
+      const json = JSON.stringify(data);
+      jsonDatas = JSON.parse(json);
+      let result = jsonDatas;
+      console.log(result);
+      return res.json(result);
+    })
+  });
+  
 
 
 // insert post로 (시험에서 틀린단어 , 체크한단어)

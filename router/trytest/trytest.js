@@ -150,23 +150,27 @@ router.get("/numbegginer/:tryclass",(req,res) => {
   })
 });
 
-router.get("/getwordmean/:word",(req,res) => {
-  const word = req.params.word;
-  const query = "select * from trytest where word = ? ";
-  connection.query(query,[word] ,function(error,rows){
-    let data = { 
-      "word" : "", 
-      "mean" : ""
-    }
-    data.word = rows[0].word;
-    data.mean = rows[0].mean;
-    const json = JSON.stringify(data);
-    jsonDatas = JSON.parse(json);
-    let result = jsonDatas;
-    console.log(result);
-    return res.json(result);
-  })
-});
+
+
+
+// router.get("/getresult/:word",(req,res) => {
+//   const email = req.params.email;
+//   const word = req.params.word;
+//   const query = "select * from trytest where word = ? ";
+//   connection.query(query,[email,word] ,function(error,rows){
+//     let data = { 
+//       "word" : "", 
+//       "mean" : ""
+//     }
+//     data.word = rows[0].word;
+//     data.mean = rows[0].mean;
+//     const json = JSON.stringify(data);
+//     jsonDatas = JSON.parse(json);
+//     let result = jsonDatas;
+//     console.log(result);
+//     return res.json(result);
+//   })
+// });
 
 
 
