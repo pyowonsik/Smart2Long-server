@@ -87,11 +87,11 @@ router.get("/getwordlist/:tryclass",function (req,res){
           return data.find((e) => (e === n));
         }
 
-        console.log(data);
+        // console.log(data);
         const json = JSON.stringify(data);
         jsonDatas = JSON.parse(json);
         let result = jsonDatas;
-        console.log(result);
+        // console.log(result);
         return res.json(result);
        }
    
@@ -99,8 +99,6 @@ router.get("/getwordlist/:tryclass",function (req,res){
 })
 
 
-
-// email 에 맞는 문제를 넣어줘야함
 router.get("/getfirstword/:tryclass",function (req,res){
 
   const tryclass = req.params.tryclass;
@@ -116,7 +114,8 @@ router.get("/getfirstword/:tryclass",function (req,res){
         console.log(err);
         // return res.status(400).json({message : "trytest failed"});
     } else{
-        let n = Math.floor(Math.random() * rows.length + 1 )
+        let n = Math.floor(Math.random() * rows.length  )
+        
         data.word = rows[n].word;
         data.mean = rows[n].mean;
         const json = JSON.stringify(data);
