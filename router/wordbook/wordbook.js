@@ -156,6 +156,40 @@ router.get('/getwordinfo/:word', (req,res) => {
 })
 
 
+
+// Test 페이지에서 (email,word)로 wordinfo 를 가져와서 insertword로 단어장에 넣어줘야함
+router.get('/getmeaninfo/:mean', (req,res) => {
+
+    const mean = req.params.mean;
+
+    const query = "select * from trytest where mean = ? ";
+    connection.query(query,[mean],function(error,rows){
+        
+        
+    
+
+        let data = {
+            "word" : "",
+            "mean" : "",
+            "ex" : ""           
+        }
+
+        console.log(rows[0]);
+        data.word = rows[0].word;
+        data.mean = rows[0].mean;
+        data.ex = rows[0].ex;
+        const json = JSON.stringify(data);
+        console.log(json);
+        jsonDatas = JSON.parse(json);
+        console.log(jsonDatas);
+        let result = jsonDatas;
+        console.log(result);
+        return res.json(result);
+    })
+
+})
+
+
 router.get("/gettodayword/:email",(req,res) => {
     
 
