@@ -52,6 +52,54 @@ router.post("/",function (req,res){
 })
 
 
+// 아이디 찾기
+router.get("/getemail/:name/:phone",(req,res) =>{
+
+  const name = req.params.name;
+  const phone = req.params.phone;
+
+
+
+  const query = "select * from users where name = ? AND phone = ? ";
+  connection.query(query,[name,phone],function(error,rows){
+
+    console.log(rows[0]);
+    let data = rows[0].email;
+    const json = JSON.stringify(data);
+    jsonDatas = JSON.parse(json);
+    let result = jsonDatas;
+    console.log(result);
+    res.json(result);
+
+
+  });
+});
+
+// 비밀번호 찾기
+router.get("/getpasswd/:email/:name/:phone",(req,res) =>{
+
+  const email = req.params.email;
+  const name = req.params.name;
+  const phone = req.params.phone;
+
+
+
+  const query = "select * from users where email = ? AND  name = ? AND phone = ? ";
+  connection.query(query,[email,name,phone],function(error,rows){
+
+    console.log(rows[0]);
+    let data = rows[0].passwd;
+    const json = JSON.stringify(data);
+    jsonDatas = JSON.parse(json);
+    let result = jsonDatas;
+    console.log(result);
+    res.json(result);
+
+
+  });
+});
+
+
 // app.get("/item/:id", (req, res) =>{
 //   let id = req.params.id;
 //   let datas = fs.readFileSync("shoppingData.json");

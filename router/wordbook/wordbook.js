@@ -202,7 +202,7 @@ router.get("/gettodayword/:email",(req,res) => {
         "mean" : "",
       }
   
-      const n = Math.floor(Math.random() * (rows.length) + 1)
+      const n = Math.floor(Math.random() * (rows.length))
       data.word = rows[n].word;
       data.mean = rows[n].mean;
       const json = JSON.stringify(data);
