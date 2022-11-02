@@ -61,12 +61,41 @@ router.get("/getwordbooklist/:email",(req,res) => {
             console.log(email);
             
             let data = [];
+
+            // 단어장 리스트에 데이터 모두 삽입
             if(error) console.log(error);
             for(var i = 0;i < rows.length;i++){
                 data.push({"word":rows[i].word,"mean" :rows[i].mean});
                 // console.log(data[i]);
             }
-            console.log(data);
+
+            // 중복 단어 제거 
+            const reword = data.map(function (val, index) {
+                return val['word'];
+            }).filter(function (val, index, arr) {
+                return arr.indexOf(val) === index;
+            });
+            
+            // 중복 의미 제거
+            const remean = data.map(function (val, index) {
+                return val['mean'];
+            }).filter(function (val, index, arr) {
+                return arr.indexOf(val) === index;
+            });
+        
+            // console.log(reword);
+            // console.log(remaan);
+
+            // 데이터 초기화
+            data = [];
+            
+            // 중복 단어 제거후 데이터 삽입
+            for(var i = 0;i < reword.length;i++){
+                
+                data.push({"word":reword[i],"mean" :remean[i]});
+                // console.log(data[i]);
+            }
+
             const json = JSON.stringify(data);
             jsonDatas = JSON.parse(json);
             let result = jsonDatas;
@@ -74,6 +103,16 @@ router.get("/getwordbooklist/:email",(req,res) => {
             return res.json(result);
         })
     })
+
+   
+
+
+
+
+
+
+
+
 
 
 router.get("/getexample/:word",(req,res) => {

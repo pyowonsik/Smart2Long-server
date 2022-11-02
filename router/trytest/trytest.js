@@ -98,7 +98,7 @@ router.get("/getwordlist/:tryclass",function (req,res){
   })
 })
 
-
+ 
 router.get("/getfirstword/:tryclass",function (req,res){
 
   const tryclass = req.params.tryclass;
