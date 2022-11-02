@@ -218,11 +218,11 @@ router.get('/getmeaninfo/:mean', (req,res) => {
         data.mean = rows[0].mean;
         data.ex = rows[0].ex;
         const json = JSON.stringify(data);
-        console.log(json);
+        // console.log(json);
         jsonDatas = JSON.parse(json);
-        console.log(jsonDatas);
+        // console.log(jsonDatas);
         let result = jsonDatas;
-        console.log(result);
+        // console.log(result);
         return res.json(result);
     })
 

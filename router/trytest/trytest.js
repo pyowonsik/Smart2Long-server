@@ -121,7 +121,7 @@ router.get("/getfirstword/:tryclass",function (req,res){
         const json = JSON.stringify(data);
         jsonDatas = JSON.parse(json);
         let result = jsonDatas;
-        console.log(result);
+        // console.log(result);
         return res.json(result);
        }
    
@@ -143,7 +143,7 @@ router.get("/numbegginer/:tryclass",(req,res) => {
     if(error) console.log(error);
     let data = rows.length;
     jsonDatas = JSON.parse(data);
-    console.log(jsonDatas);
+    // console.log(jsonDatas);
     let result = jsonDatas;
     return res.json(result);
   })
