@@ -129,6 +129,35 @@ router.get("/getfirstword/:tryclass",function (req,res){
 })
 
 
+// 단어장 시험 api
+router.get("/getwordbookword/:email",function (req,res){
+
+  const email = req.params.email;
+
+  const query = "select * from wordbook where email = ?";
+
+  connection.query(query,[email],function(err,rows){
+    data = {
+      "word" : "",
+      "mean" : "",
+    };
+    if(err){
+        console.log(err);
+        // return res.status(400).json({message : "trytest failed"});
+    } else{
+        let n = Math.floor(Math.random() * rows.length)
+        data.word = rows[n].word;
+        data.mean = rows[n].mean;
+        const json = JSON.stringify(data);
+        jsonDatas = JSON.parse(json);
+        let result = jsonDatas;
+        console.log(result);
+        return res.json(result);
+       }
+  })
+})
+
+
 
 
 
