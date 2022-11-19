@@ -160,6 +160,22 @@ router.post("/deleteword",(req,res) =>{
 
 
 
+router.post("/deletemean",(req,res) =>{
+    const email = req.body.email;
+    const mean = req.body.mean;
+    const query = "delete from wordbook where email = ? AND mean = ? ";
+    connection.query(query,[email,mean],function(error,rows){
+        if(error){
+           console.log(error);
+            return res.status(400).json({ message:"delete failed"});
+        }else{   
+            return res.status(200).json({ message : "delete success"});
+        }
+    })
+})
+
+
+
 
 // Test 페이지에서 (email,word)로 wordinfo 를 가져와서 insertword로 단어장에 넣어줘야함
 router.get('/getwordinfo/:word', (req,res) => {
@@ -302,9 +318,20 @@ router.get("/getwordmean/:email/:word",(req,res) => {
   
 
 
-// insert post로 (시험에서 틀린단어 , 체크한단어)
 
 
-
+router.get("/getwordlength/:email",(req,res) => {
+    const email =  req.params.email;
+    const query = "select * from wordbook where email = ? ";
+    connection.query(query,[email] ,function(error,rows){
+      
+      if(error) console.log(error);
+      let data = rows.length;
+      jsonDatas = JSON.parse(data);
+      let result = jsonDatas;
+      return res.json(result);
+    })
+  });
+  
 module.exports = router;
 
