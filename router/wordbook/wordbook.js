@@ -71,14 +71,14 @@ router.get("/getwordbooklist/:email",(req,res) => {
 
             // 중복 단어 제거 
             const reword = data.map(function (val, index) {
-                return val['word'];
+                return val["word"];
             }).filter(function (val, index, arr) {
                 return arr.indexOf(val) === index;
             });
             
             // 중복 의미 제거
             const remean = data.map(function (val, index) {
-                return val['mean'];
+                return val["mean"];
             }).filter(function (val, index, arr) {
                 return arr.indexOf(val) === index;
             });
