@@ -115,12 +115,14 @@ router.get("/getpasswd/:email/:name/",(req,res) =>{
 // });
 
 
-// // 비밀번호 변경 
-// router.get("/chanepasswd",(req,res) =>{
+// 비밀번호 변경 
+// router.post("/chanepasswd",(req,res) =>{
 //   const email = req.params.email;
 //   const passwd = req.params.passwd;
-//   const chagepasswd = req.params.chagepasswd;
-//   const query = "update users set passwd = 'changepasswd' where email = ?";
+//   const newpasswd = req.params.chagepasswd;
+//   const renewpasswd = req.params.renewpasswd;
+
+//   const query = "update users set passwd = newpasswd where email = ?";
 //   connection.query(query,[email,passwd,chagepasswd],function(error,rows){
 //     if(error){
 //       console.log(error);
